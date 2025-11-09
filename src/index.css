@@ -1,5 +1,118 @@
-body {
+/* --- Estilos generales --- */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: sans-serif;
-  background-color: #f9f9f9;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* --- Contenedor principal --- */
+.login-container {
+  background: #ffffff;
+  padding: 40px 50px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+/* --- Animación --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-container h2 {
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 1.8em;
+}
+
+/* --- Campos de entrada --- */
+.input-field {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: 0.3s;
+}
+
+.input-field input:focus {
+  border-color: #1abc9c;
+  box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+  outline: none;
+}
+
+/* --- Botón --- */
+.btn-login {
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1em;
+  transition: background 0.3s;
+}
+
+.btn-login:hover {
+  background-color: #16a085;
+}
+
+/* --- Enlaces --- */
+.extra-links {
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+.extra-links a {
+  color: #1abc9c;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.extra-links a:hover {
+  color: #16a085;
+}
+
+/* --- Responsivo --- */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 30px;
+  }
+
+  .login-container h2 {
+    font-size: 1.5em;
+  }
 }
