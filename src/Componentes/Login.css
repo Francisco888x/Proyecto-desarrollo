@@ -85,3 +85,7 @@
 @media (max-width: 480px) {
   .login-card { padding: 20px; }
 }
+
+.btn-login:nth-of-type(2):hover {
+  background: #27ae60;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Login.css';
+import './Login.css'; // Reutilizamos los mismos estilos
 
-function Login({ onLogin, onShowRegister }) {
+function Register({ onRegister, onCancel }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -9,11 +9,11 @@ function Login({ onLogin, onShowRegister }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
-    if (!username) return setError('Ingresa tu usuario.');
-    if (!password) return setError('Ingresa tu contraseña.');
+    if (!username) return setError('Ingresa un nombre de usuario.');
+    if (!password) return setError('Ingresa una contraseña.');
 
-    console.log('Login enviado:', { username, password });
-    if (onLogin) onLogin({ email: username });
+    console.log('Usuario registrado:', { username, password });
+    if (onRegister) onRegister({ username });
 
     setUsername('');
     setPassword('');
@@ -22,7 +22,7 @@ function Login({ onLogin, onShowRegister }) {
   return (
     <div className="login-component">
       <div className="login-card">
-        <h2>Iniciar Sesión</h2>
+        <h2>Registrar Usuario</h2>
         {error && <div className="login-error">{error}</div>}
         <form onSubmit={handleSubmit} className="login-form" noValidate>
           <label className="input-label">
@@ -47,14 +47,14 @@ function Login({ onLogin, onShowRegister }) {
             />
           </label>
 
-          <button type="submit" className="btn-login">Entrar</button>
+          <button type="submit" className="btn-login">Registrar</button>
           <button
             type="button"
             className="btn-login"
-            style={{ background: '#2ecc71', marginTop: '8px' }}
-            onClick={onShowRegister}
+            style={{ background: '#e67e22', marginTop: '8px' }}
+            onClick={onCancel}
           >
-            Nuevo usuario
+            Cancelar
           </button>
         </form>
       </div>
@@ -62,4 +62,4 @@ function Login({ onLogin, onShowRegister }) {
   );
 }
 
-export default Login;
+export default Register;

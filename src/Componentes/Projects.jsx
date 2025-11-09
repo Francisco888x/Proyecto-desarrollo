@@ -3,6 +3,7 @@ import './Projects.css';
 
 // Componente simple que muestra tablas de proyectos relacionados con acciones comunitarias.
 // En una app real los datos vendrían de una API.
+
 const sampleProjects = [
   { id: 1, title: 'Limpieza del Barrio', description: 'Jornada de limpieza en la plaza central', status: 'En curso', creator: 'juan@ejemplo.com', maxParticipants: 30 },
   { id: 2, title: 'Huerto Comunitario', description: 'Creación y mantenimiento de huerto en escuela local', status: 'Planeado', creator: 'maria@ejemplo.com', maxParticipants: 20 },
