@@ -6,17 +6,36 @@ function Login({ onLogin, onShowRegister }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (!username) return setError('Ingresa tu usuario.');
-    if (!password) return setError('Ingresa tu contraseña.');
 
-    console.log('Login enviado:', { username, password });
-    if (onLogin) onLogin({ email: username });
+    if (!username || !password) {
+      setError('Ingresa tu usuario y contraseña.');
+      return;
+    }
 
-    setUsername('');
-    setPassword('');
+    try {
+      const response = await fetch('http://localhost/proyecto-desarrollo/backend/validateLogin.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          usuario: username,
+          contra: password,
+        }).toString(),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        if (onLogin) onLogin({ email: username });
+      } else {
+        setError(data.message || 'Error al iniciar sesión.');
+      }
+    } catch (err) {
+      console.error('Error en login:', err);
+      setError('No se pudo conectar con el servidor.');
+    }
   };
 
   return (
