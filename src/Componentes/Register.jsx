@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import './Login.css';
+// ⚠️ Importación de CSS cambiada y ruta ajustada a la nueva estructura
+import '../styles/Login.css'; 
 
 function Register({ onRegister, onCancel }) {
+  // ... (lógica de estado y handleSubmit sin cambios) ...
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -45,7 +47,8 @@ function Register({ onRegister, onCancel }) {
       <div className="login-card">
         <h2>Registrar Usuario</h2>
         {error && <div className="login-error">{error}</div>}
-        {success && <div className="login-success">{success}</div>}
+        {/* Se mantiene login-success, que necesitarías agregar a login-module.css o global.css */}
+        {success && <div className="login-success">{success}</div>} 
 
         <form onSubmit={handleSubmit} className="login-form" noValidate>
           <label className="input-label">
@@ -68,11 +71,13 @@ function Register({ onRegister, onCancel }) {
             />
           </label>
 
-          <button type="submit" className="btn-login">Registrar</button>
+          {/* 🎯 Clase de botón refactorizada */}
+          <button type="submit" className="btn-primary">Registrar</button> 
           <button
             type="button"
-            className="btn-login"
-            style={{ background: '#e67e22', marginTop: '8px' }}
+            className="btn-primary" // 🎯 Clase de botón refactorizada
+            // ⚠️ Estilo en línea: Es mejor mover este estilo al CSS como .btn-secondary o .btn-warning.
+            style={{ background: '#e67e22', marginTop: '8px' }} 
             onClick={onCancel}
           >
             Cancelar

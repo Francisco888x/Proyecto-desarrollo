@@ -1,0 +1,110 @@
+/* --- src/styles/projects-module.css --- */
+
+.projects-component {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1abc9c10, #16a08510);
+  /* Se eliminó la doble definición de .projects-component */
+}
+
+.projects-card {
+  background: linear-gradient(180deg, #ffffff, #fbfffd);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(16, 64, 56, 0.12);
+  width: 100%;
+  max-width: 980px;
+  border-left: 6px solid #1abc9c;
+}
+
+.projects-card h2 {
+  margin: 0;
+  color: #0f3f36;
+  font-size: 1.35rem;
+}
+
+.welcome {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  color: #4b5b55;
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* Se eliminó .logout-btn, ahora usa .btn-logout-red o .btn-primary */
+
+.table-wrap { overflow-x: auto; margin-top: 6px; }
+
+.projects-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  font-size: 0.95rem;
+}
+
+.projects-table thead th {
+  text-align: left;
+  padding: 12px 14px;
+  color: #2b4b45;
+  font-weight: 600;
+  /* Se eliminó la regla 'border-bottom: 2px solid #e9f0ef;' repetida en el archivo. */
+}
+
+.projects-table tbody tr {
+  background: #fff;
+  box-shadow: 0 6px 12px rgba(10, 28, 24, 0.04);
+  border-radius: 10px;
+  /* Se eliminó el padding y border-bottom redundante, se mantuvieron los mejores estilos. */
+}
+
+.projects-table tbody td {
+  padding: 12px 14px;
+  color: #42524e;
+  vertical-align: middle;
+}
+
+.projects-table tbody tr td:first-child { width: 60px; font-weight:700; color:#1a3f36 }
+
+.projects-table tbody tr:hover { 
+  transform: translateY(-2px); 
+  transition: transform 120ms ease; 
+  background: #fcfffd; /* Se agregó el hover background de la sección eliminada */
+}
+
+/* Barra superior */
+.projects-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 30px;
+  background: #f9fefc;
+  border-bottom: 2px solid #e5f5f1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.topbar-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Se eliminaron .btn-new y .btn-logout, ahora usan .btn-primary y .btn-logout-red */
+
+@media (max-width: 640px) {
+  .projects-card { padding: 18px; border-left-width: 4px; }
+  .projects-table thead th, .projects-table tbody td { padding: 8px; }
+  .projects-component { padding: 26px 12px }
+}
+
+@media (max-width: 600px) {
+  .projects-card { padding: 16px; }
+  /* La regla de tabla es redundante con la de 640px, pero la mantengo si necesitas ese breakpoint específico */
+  /* .projects-table thead th, .projects-table tbody td { padding: 8px; } */ 
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Login.css';
+// ⚠️ Importación de CSS cambiada y ruta ajustada a la nueva estructura
+import '../styles/Login.css';
 
 function Login({ onLogin, onShowRegister }) {
   const [username, setUsername] = useState('');
@@ -66,11 +67,14 @@ function Login({ onLogin, onShowRegister }) {
             />
           </label>
 
-          <button type="submit" className="btn-login">Entrar</button>
+          {/* 🎯 Clase de botón refactorizada */}
+          <button type="submit" className="btn-primary">Entrar</button> 
           <button
             type="button"
-            className="btn-login"
-            style={{ background: '#2ecc71', marginTop: '8px' }}
+            className="btn-primary" // 🎯 Clase de botón refactorizada
+            // ⚠️ Estilo en línea: Es mejor mover este estilo al CSS si es posible.
+            // En login-module.css, la regla nth-of-type(2):hover ya estaba. Agregué una clase de utilidad en global.css llamada .btn-success para esto.
+            style={{ background: '#2ecc71', marginTop: '8px' }} 
             onClick={onShowRegister}
           >
             Nuevo usuario

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import './Projects.css';
+import React, { useEffect, useState, useCallback } from 'react';
+import '../styles/Projects.css'; // Ruta corregida
 import NewProject from './NewProject';
 
 function Projects({ user, onLogout }) {
@@ -8,28 +8,41 @@ function Projects({ user, onLogout }) {
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // --- Cargar proyectos desde backend ---
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch('http://localhost/proyecto-desarrollo/backend/readProjects.php');
-        const data = await response.json();
+  // 1. 🎯 FUNCIÓN DE CARGA EXTRAÍDA Y MEMORIZADA
+  // Usamos useCallback para que esta función no cambie a menos que sus dependencias lo hagan
+  const fetchProjects = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost/proyecto-desarrollo/backend/readProjects.php');
+      const data = await response.json();
 
-        if (data.success) {
-          setProjects(data.data);
-        } else {
-          console.error('Error al cargar proyectos:', data.message);
-        }
-      } catch (err) {
-        console.error('Error de conexión:', err);
-      } finally {
-        setLoading(false);
+      if (data.success) {
+        setProjects(data.data);
+      } else {
+        console.error('Error al cargar proyectos:', data.message);
+        setProjects([]); // Limpiar en caso de error
       }
-    };
+    } catch (err) {
+      console.error('Error de conexión:', err);
+      setProjects([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []); // Dependencias vacías: solo se define una vez
 
+  // --- Cargar proyectos al inicio ---
+  useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [fetchProjects]); // Dependencia: Se llama cuando fetchProjects cambia (que solo es al inicio)
 
+  // 3. 🎯 FUNCIÓN DE CREACIÓN MEJORADA
+  const handleCreate = () => {
+    // Al crearse exitosamente, cerramos el formulario y recargamos la lista
+    setShowForm(false);
+    fetchProjects(); // ⭐ ¡Esta es la clave para recargar la tabla!
+  };
+  
+  // La función handleJoin se queda sin cambios
   const handleJoin = (projectId) => {
     setJoinedProjects((prev) =>
       prev.includes(projectId)
@@ -38,16 +51,11 @@ function Projects({ user, onLogout }) {
     );
   };
 
-  const handleCreate = (newProject) => {
-    setProjects([...projects, newProject]);
-    setShowForm(false);
-  };
-
   if (showForm) {
     return (
       <NewProject
         user={user}
-        onCreate={handleCreate}
+        onCreate={handleCreate} // Ahora solo llama a handleCreate, que recarga la lista
         onCancel={() => setShowForm(false)}
       />
     );
@@ -56,7 +64,6 @@ function Projects({ user, onLogout }) {
   if (loading) {
     return <div className="projects-component"><p>Cargando proyectos...</p></div>;
   }
-
   return (
     <div>
       <div className="projects-topbar">
@@ -64,16 +71,19 @@ function Projects({ user, onLogout }) {
           <strong>{user.email}</strong>
         </div>
         <div className="topbar-buttons">
-          <button className="btn-new" onClick={() => setShowForm(true)}>
+          {/* 🎯 Clase de botón refactorizada: btn-new -> btn-primary */}
+          <button className="btn-primary" onClick={() => setShowForm(true)}> 
             Nuevo proyecto
           </button>
-          <button className="btn-logout" onClick={onLogout}>
+          {/* 🎯 Clase de botón refactorizada: btn-logout -> btn-logout-red */}
+          <button className="btn-logout-red" onClick={onLogout}> 
             Cerrar sesión
           </button>
         </div>
       </div>
 
       <div className="projects-component">
+        {/* ... (cuerpo de la tabla sin cambios) ... */}
         <div className="projects-card">
           <h2>Proyectos</h2>
           <div className="table-wrap">
@@ -103,6 +113,7 @@ function Projects({ user, onLogout }) {
                       <td>{p.cupo}</td>
                       <td>
                         <button
+                          // La clase btn-join se mantiene en global.css
                           className={`btn-join ${
                             joinedProjects.includes(p.id) ? 'joined' : ''
                           }`}

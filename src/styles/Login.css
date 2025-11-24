@@ -1,24 +1,32 @@
+/* --- src/styles/login-module.css --- */
+
 .login-component {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  /* El body global.css ya centra, pero esto es un respaldo/ajuste */
+  min-height: 80vh; 
   padding: 20px;
 }
 
 .login-card {
   background: #ffffff;
-  padding: 28px;
+  /* Estilos de index.css eran 40px 50px, los de Login.css 28px. Elegí 28px por ser más reciente. */
+  padding: 28px; 
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  /* Box-shadow de Login.css es más ligero, lo mantengo. */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12); 
   width: 100%;
   max-width: 420px;
+  /* Login.css no tenía animación, si la necesitas, usa: animation: fadeIn 1s ease; */
 }
 
 .login-card h2 {
-  margin-bottom: 14px;
+  /* Combinando estilos de h2 de ambos: */
+  margin-bottom: 20px; /* Promedio entre 25px y 14px */
   color: #333;
   text-align: center;
+  font-size: 1.8em;
 }
 
 .login-error {
@@ -36,6 +44,7 @@
   gap: 12px;
 }
 
+/* Estilo del label y su contenedor (antes .input-field) */
 .input-label {
   font-size: 0.9rem;
   color: #444;
@@ -43,6 +52,7 @@
   flex-direction: column;
 }
 
+/* Estilo del input (simplificado, antes con .input-field input) */
 .input-label input {
   margin-top: 8px;
   padding: 10px 12px;
@@ -52,24 +62,10 @@
 }
 
 .input-label input:focus {
+  /* Unificado con el focus genérico de textarea/select en global.css */
   border-color: #1abc9c;
   box-shadow: 0 0 8px rgba(26,188,156,0.12);
   outline: none;
-}
-
-.btn-login {
-  margin-top: 6px;
-  background: #1abc9c;
-  color: #fff;
-  border: none;
-  padding: 10px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-login:hover {
-  background: #16a085;
 }
 
 .login-links {
@@ -80,12 +76,12 @@
 }
 
 .login-links a { color: #1abc9c; text-decoration: none; }
+.login-links a:hover { color: #16a085; } /* Añadido de index.css */
 .sep { margin: 0 6px; color: #999; }
 
 @media (max-width: 480px) {
   .login-card { padding: 20px; }
+  .login-card h2 { font-size: 1.5em; } /* De index.css */
 }
 
-.btn-login:nth-of-type(2):hover {
-  background: #27ae60;
-}
+/* Se elimina la redundancia de btn-login, ahora usa .btn-primary */

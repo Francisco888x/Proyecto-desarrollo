@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import './Projects.css'; // Reutilizamos estilos base
+// src/Componentes/NewProject.jsx
+
+import React, { useState } from 'react'; // Asegúrate de importar useState
+import '../styles/Login.css'; 
+import '../styles/Projects.css';
+import '../styles/global.css'
 
 function NewProject({ user, onCreate, onCancel }) {
+  // ⭐ DECLARACIONES DE ESTADO (AQUÍ ESTABA EL ERROR DE ESLint)
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('Planeado');
@@ -34,14 +39,10 @@ function NewProject({ user, onCreate, onCancel }) {
 
       if (data.success) {
         alert('Proyecto guardado correctamente ✅');
-        onCreate({
-          id: data.id,
-          title,
-          description,
-          status,
-          creator: user.email,
-          cupo: parseInt(cupo),
-        });
+        
+        // Llama a onCreate (que recarga la lista en Projects.jsx)
+        onCreate(); 
+        
       } else {
         setError(data.message || 'Error al guardar proyecto.');
       }
@@ -51,8 +52,9 @@ function NewProject({ user, onCreate, onCancel }) {
     }
   };
 
+
   return (
-    <div className="projects-component">
+    <div className="projects-component"> 
       <div className="projects-card">
         <h2>Nuevo Proyecto</h2>
         {error && <div className="login-error">{error}</div>}
@@ -75,7 +77,7 @@ function NewProject({ user, onCreate, onCancel }) {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Describe el proyecto brevemente..."
               rows={4}
-              style={{ resize: 'none', padding: '10px' }}
+              style={{ resize: 'none' }} // Estilo en línea: El padding ya se define en Projects.css
             ></textarea>
           </label>
 
@@ -99,10 +101,11 @@ function NewProject({ user, onCreate, onCancel }) {
           </label>
 
           <div className="topbar-buttons" style={{ marginTop: '16px' }}>
-            <button type="submit" className="btn-new">Guardar proyecto</button>
+            {/* ⚠️ CLASE DE BOTÓN: Si usaste la refactorización anterior, usa btn-primary/btn-logout-red */}
+            <button type="submit" className="btn-new">Guardar proyecto</button> 
             <button
               type="button"
-              className="btn-logout"
+              className="btn-logout" 
               onClick={onCancel}
             >
               Cancelar

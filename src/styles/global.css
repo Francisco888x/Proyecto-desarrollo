@@ -1,0 +1,141 @@
+/* --- src/styles/global.css --- */
+
+/* Estilos generales y reseteo (de index.css) */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Estilos de Body para centrar la app (de index.css) */
+body {
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Nota: En React, se suele centrar el contenido principal, no body, pero mantendremos este por si es tu diseño. */
+  min-height: 100vh; /* Cambiado de height: 100vh para permitir scroll si es necesario */
+}
+
+/* Animación (de index.css) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Estilos de Formulario Comunes (De Login.css, aplicados a cualquier textarea/select) --- */
+textarea, select {
+  border: 1px solid #e0e0e0; /* Unificado con el borde de input de Login.css */
+  border-radius: 8px; /* Valor común */
+  font-size: 1rem;
+}
+
+textarea:focus, select:focus {
+  border-color: #1abc9c;
+  box-shadow: 0 0 8px rgba(26,188,156,0.12); /* Unificado con el focus de input de Login.css */
+  outline: none;
+}
+
+/* --- Estilos de Botones Comunes --- */
+/* Esta clase se usará en vez de .btn-login o .logout-btn si tienen el mismo estilo base */
+.btn-base {
+  color: white;
+  border: none;
+  border-radius: 8px; /* Común en todos los botones */
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+/* --- src/styles/global.css (CORREGIDO) --- */
+
+/* Estilos generales y reseteo (sin cambios) */
+/* ... */
+
+/* --- 1. Estilos de Botones Comunes --- */
+.btn-base {
+  color: white;
+  border: none;
+  border-radius: 8px; 
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.1s ease;
+  /* (Se agregaron padding y display/width para que funcione como botón real) */
+  padding: 10px 18px; 
+  width: 100%; /* Para que ocupe todo el ancho en un formulario */
+  display: block; /* Para que width: 100% funcione */
+}
+
+/* --- 2. Botón Principal (Verde) --- */
+.btn-primary {
+  /* ¡COPIA DE .btn-base! (Esto reemplaza el @extend) */
+  color: white;
+  border: none;
+  border-radius: 8px; 
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.1s ease;
+  padding: 10px 18px; 
+  width: 100%;
+  display: block; 
+  
+  /* Estilo específico */
+  background-color: #1abc9c; 
+}
+
+.btn-primary:hover {
+  background-color: #16a085; 
+}
+
+/* --- 3. Botón de Logout (Rojo) --- */
+.btn-logout-red {
+  /* ¡COPIA DE .btn-base! (Esto reemplaza el @extend) */
+  color: white;
+  border: none;
+  border-radius: 8px; 
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.1s ease;
+  padding: 10px 18px; 
+  width: auto; /* Se cambia a 'auto' si se usa en la barra superior (Projects.jsx) */
+  display: inline-block; /* Para que funcione con width: auto */
+
+  /* Estilo específico */
+  background: #e74c3c;
+}
+
+.btn-logout-red:hover {
+  background: #c0392b;
+}
+/* Botón Join/Unirse (De Projects.css) */
+.btn-join {
+  background: #1abc9c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn-join:hover {
+  background: #16a085;
+  transform: scale(1.05);
+}
+
+.btn-join.joined {
+  background: #2ecc71;
+}
+
+.btn-join.joined:hover {
+  background: #27ae60;
+}
